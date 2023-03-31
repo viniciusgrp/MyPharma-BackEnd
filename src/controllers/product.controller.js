@@ -5,11 +5,6 @@ export const createProductController = async (req, res) => {
   const productInfos = req.body;
   try {
       const product = await Product.create(productInfos);
-      const categoryName = productInfos.category.toLowerCase()
-      const category = await Category.findOne({name: categoryName})
-      if (!category){
-        await Category.create({name: categoryName})
-      }
     return res.status(201).send(product);
   } catch (err) {
     return res.status(400).send({
@@ -53,5 +48,15 @@ export const getProductsController = async (req, res) => {
         return res.send(products)
     } catch (err) {
         return res.status(400).send({"error": err.errors})
+    }
+}
+
+export const getProductsByCategorie = async (req, res) => {
+    try {
+        const category = req.params.category.toLowerCase()
+        const categories = await Product.find({category: category})
+        return res.status(200).send(categories)
+    } catch (error) {
+        console.log(error)
     }
 }
