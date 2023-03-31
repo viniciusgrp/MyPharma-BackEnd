@@ -1,9 +1,15 @@
-import Product from "../models/products";
+import Product from "../models/products.js";
+import Category from "../models/categories.js";
 
 export const createProductController = async (req, res) => {
   const productInfos = req.body;
   try {
-    const product = await Product.create(productInfos);
+      const product = await Product.create(productInfos);
+      const categoryName = productInfos.category.toLowerCase()
+      const category = await Category.findOne({name: categoryName})
+      if (!category){
+        await Category.create({name: categoryName})
+      }
     return res.status(201).send(product);
   } catch (err) {
     return res.status(400).send({

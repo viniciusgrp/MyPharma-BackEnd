@@ -1,4 +1,4 @@
-import mongoose from "../database";
+import mongoose from "../database/index.js";
 
 const ProductSchema = new mongoose.Schema({
     name: {
@@ -7,6 +7,10 @@ const ProductSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
+        required: true
+    },
+    category: {
+        type: String,
         required: true
     },
     img: {
