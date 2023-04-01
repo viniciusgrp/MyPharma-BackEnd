@@ -1,5 +1,5 @@
 import Product from "../models/products.js";
-import Category from "../models/categories.js";
+import aqp from 'api-query-params';
 
 export const createProductController = async (req, res) => {
   const productInfos = req.body;
@@ -43,8 +43,9 @@ export const updateProductsController = async (req, res) => {
 }
 
 export const getProductsController = async (req, res) => {
+  const { filter, skip, limit, sort } = aqp(req.query)
     try {
-        const products = await Product.find()
+        const products = await Product.find(filter).skip(skip).limit(limit).sort(sort)
         return res.send(products)
     } catch (err) {
         return res.status(400).send({"error": err.errors})
@@ -52,9 +53,10 @@ export const getProductsController = async (req, res) => {
 }
 
 export const getProductsByCategorie = async (req, res) => {
-    try {
+  const { skip, limit, sort } = aqp(req.query)
+  try {
         const category = req.params.category.toLowerCase()
-        const categories = await Product.find({category: category})
+        const categories = await Product.find({category: category}).skip().limit().sort()
         return res.status(200).send(categories)
     } catch (error) {
         console.log(error)
