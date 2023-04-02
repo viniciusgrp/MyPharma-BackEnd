@@ -2,8 +2,9 @@ import Product from "../models/products.js";
 import aqp from 'api-query-params';
 
 export const createProductController = async (req, res) => {
-  const productInfos = req.body;
+  let productInfos = req.body;
   try {
+    productInfos.name = productInfos.name.toUpperCase()
       const product = await Product.create(productInfos);
     return res.status(201).send(product);
   } catch (err) {
