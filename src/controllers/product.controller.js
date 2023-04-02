@@ -2,8 +2,9 @@ import Product from "../models/products.js";
 import aqp from 'api-query-params';
 
 export const createProductController = async (req, res) => {
-  const productInfos = req.body;
+  let productInfos = req.body;
   try {
+    productInfos.name = productInfos.name.toUpperCase()
       const product = await Product.create(productInfos);
     return res.status(201).send(product);
   } catch (err) {
@@ -23,6 +24,7 @@ export const deleteProductController = async (req, res) => {
     await Product.deleteOne({ _id: productId });
     return res.status(200).send();
   } catch (err) {
+    console.error(err)
     return res.send({ error: err.errors });
   }
 };
@@ -38,6 +40,7 @@ export const updateProductsController = async (req, res) => {
         const productUpdated = await Product.findById(id)
         return res.send(productUpdated)
     } catch (err) {
+      console.error(err)
         return res.status(400).send({"error": err.errors})
     }
 }
@@ -48,17 +51,7 @@ export const getProductsController = async (req, res) => {
         const products = await Product.find(filter).skip(skip).limit(limit).sort(sort)
         return res.send(products)
     } catch (err) {
+      console.error(err)
         return res.status(400).send({"error": err.errors})
-    }
-}
-
-export const getProductsByCategorie = async (req, res) => {
-  const { skip, limit, sort } = aqp(req.query)
-  try {
-        const category = req.params.category.toLowerCase()
-        const categories = await Product.find({category: category}).skip().limit().sort()
-        return res.status(200).send(categories)
-    } catch (error) {
-        console.log(error)
     }
 }
