@@ -11,12 +11,12 @@ git clone git@github.com:viniciusgrp/MyPharma-BackEnd.git
 1 - Após clonar o repositório é necessário instalar as dependencias, abra um terminal e digite o seguinte comando:
 yarn install
 
-2 - É necessário a criação de um banco de dados em MongoDB, abra o MongoDBCompass e crie um banco (Caso crie com o nome my_pharma não é necessário o próximo passo)
+2 - É necessário a criação de um banco de dados em MongoDB para rodar localmente, abra o MongoDBCompass e crie um banco.
 
-3 - Caso queira colocar um nome diferente de my_pharma no banco de dados, vá em:
+3 - Após criar é necessário mudar a conexão com banco de dados para o local, para isso vá ate:
 src/database/index.js
-Altere a linha 4 
-mongoose.connect("mongodb://127.0.0.1/my_pharma");
+Altere a linha 4 para
+mongoose.connect("mongodb://127.0.0.1/nome_do_banco");
 
 Coloque as informações de conexão com o banco de dados. Exemplo:
 mongoose.connect("mongodb://127.0.0.1/nome_do_banco");
@@ -27,16 +27,7 @@ mongoose.connect("mongodb://localhost:27017/nome_do_banco);
 4 - Após a instação execute o servidor com o comando:
 yarn dev
 
-5 - Após iniciar o front end, caso as categorias e produtos não apareçam:
-Vá em: src/index.js
-
-Altere a linha 9 
-
-app.use(cors({origin: "http://127.0.0.1:5173"}))
-
-Coloque no lugar de "http://127.0.0.1:5173" o link que está rodando o servidor front end, caso não funcione coloque "*".
-
-6 - Para a execução dos testes execute no terminal o seguinte comando:
+5 - Para a execução dos testes execute no terminal o seguinte comando:
 yarn test
 
 ========== Rotas e exemplos ==========

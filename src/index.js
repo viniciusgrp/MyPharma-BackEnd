@@ -6,7 +6,7 @@ import cors from 'cors'
 
 const app = express();
 
-app.use(cors({origin: "http://127.0.0.1:5173"}))
+app.use(cors({origin: "*"}))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(productRoutes)

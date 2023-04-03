@@ -5,7 +5,8 @@ export const createProductController = async (req, res) => {
   let productInfos = req.body;
   try {
     productInfos.name = productInfos.name.toUpperCase()
-      const product = await Product.create(productInfos);
+    productInfos.category = productInfos.category.toUpperCase()
+    const product = await Product.create(productInfos);
     return res.status(201).send(product);
   } catch (err) {
     return res.status(400).send({

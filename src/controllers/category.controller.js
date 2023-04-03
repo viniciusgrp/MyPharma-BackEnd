@@ -12,7 +12,9 @@ export const getCategoryController = async (req, res) => {
 
 export const createCategoryController = async (req, res) => {
     try {
-        const category = await Category.create(req.body)
+        const categoryInfos = req.body
+        categoryInfos.name = categoryInfos.name.toUpperCase()
+        const category = await Category.create(categoryInfos)
         return res.status(201).send(category)
     } catch (err) {
         console.log(err)
