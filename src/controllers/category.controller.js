@@ -46,7 +46,7 @@ export const deleteCategoryController = async (req, res) => {
             return res.status(404).send({"error": "Category not found!"})
         }
         await Category.deleteOne({_id: id})
-        return res.status(200)
+        return res.status(200).send()
     } catch (error) {
         console.log(error)
         return res.status(400).send({"error": err.errors})
