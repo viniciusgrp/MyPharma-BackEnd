@@ -8,6 +8,8 @@ https://github.com/viniciusgrp/MyPharma-FrontEnd
 Para clonar esse repositório digite o seguinte comando em um terminal git:
 git clone git@github.com:viniciusgrp/MyPharma-BackEnd.git
 
+Para facilitar os testes froi criado o arquivo "insomnia_Vinicius_Pacheco.json" presente na raiz do projeto, ao importá-lo utilizando o software Insomnia aparecerão todas as rotas com os exemplos para testes da aplicação.
+
 1 - Após clonar o repositório é necessário instalar as dependencias, abra um terminal e digite o seguinte comando:
 yarn install
 

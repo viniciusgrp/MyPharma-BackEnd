@@ -18,6 +18,7 @@ export const createCategoryController = async (req, res) => {
         return res.status(201).send(category)
     } catch (err) {
         console.log(err)
+        return res.status(400).send({"error": err.errors})
     }
 }
 
@@ -33,6 +34,7 @@ export const updateCategoryController = async (req, res) => {
         return res.send(updated)
     } catch (error) {
         console.log(error)
+        return res.status(400).send({"error": err.errors})
     }
 }
 
@@ -47,5 +49,6 @@ export const deleteCategoryController = async (req, res) => {
         return res.status(200)
     } catch (error) {
         console.log(error)
+        return res.status(400).send({"error": err.errors})
     }
 }
